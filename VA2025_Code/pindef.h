@@ -4,6 +4,7 @@ typedef int16_t pin_t;
 namespace pins {
 	constexpr pin_t neopixelPin = 6;
 	constexpr pin_t buttonPin = 21;
+	constexpr pin_t battVoltage = 26;
 	constexpr pin_t PS2_DAT = 16;     
 	constexpr pin_t PS2_CMD = 19; 
 	constexpr pin_t PS2_SEL = 17; 
