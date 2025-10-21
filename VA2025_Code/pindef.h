@@ -13,13 +13,13 @@ namespace pins {
 	constexpr pin_t M0_DIR_PIN  = 2;
 	constexpr pin_t M0_STEP_PIN = 3;
 	constexpr pin_t M0_CS_PIN   = 8;
-	constexpr SerialUART M0_SERIAL_PORT = Serial1;
+	constexpr SerialUART* M0_SERIAL_PORT = &Serial1;
 
 	constexpr pin_t M1_EN_PIN   = 12;
 	constexpr pin_t M1_DIR_PIN  = 11;
 	constexpr pin_t M1_STEP_PIN = 14;
 	constexpr pin_t M1_CS_PIN   = 13;
-	constexpr SerialUART M1_SERIAL_PORT = Serial2;
+	constexpr SerialUART* M1_SERIAL_PORT = &Serial2;
 
 	constexpr pin_t M2_EN_PIN   = 27;
 	constexpr pin_t M2_DIR_PIN  = 28;
