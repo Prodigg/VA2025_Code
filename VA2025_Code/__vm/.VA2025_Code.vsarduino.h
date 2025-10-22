@@ -20,7 +20,6 @@
 #include <digital.cpp> 
 #include <init.cpp> 
 #include "..\VA2025_Code.ino"
-#include "..\motor.ino"
 #include "..\ps2xController.ino"
 #endif
 #endif

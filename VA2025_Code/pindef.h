@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _PINDEF_h
+#define _PINDEF_h
+
 typedef int16_t pin_t;
 
 namespace pins {
@@ -28,3 +30,4 @@ namespace pins {
 	constexpr pin_t M2_CS_PIN   = 22;
 
 }
+#endif

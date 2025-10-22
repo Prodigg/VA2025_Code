@@ -17,7 +17,12 @@
   <ItemGroup>
     <ClCompile Include="VA2025_Code.ino" />
     <ClCompile Include="ps2xController.ino" />
-    <ClCompile Include="motor.ino" />
+    <ClCompile Include="motor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="global.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.VA2025_Code.vsarduino.h">
@@ -27,6 +32,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="motor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="global.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

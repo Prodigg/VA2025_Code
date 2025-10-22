@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _CONFIG_h
+#define _CONFIG_h
 
 namespace config {
 	constexpr uint8_t DRIVER_ADDRESS = 0b00;
@@ -34,3 +35,4 @@ namespace config {
 
 
 }
+#endif
