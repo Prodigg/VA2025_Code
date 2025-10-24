@@ -7,6 +7,8 @@
 #include <TMCStepper.h>
 #include <AccelStepper.h>
 
+motorValues_t motorValues{};
+
 void setup() {
     pinMode(pins::buttonPin, INPUT);
     pixels.begin();
@@ -24,7 +26,12 @@ void loop() {
 
     if (digitalRead(pins::buttonPin) == HIGH) {
         Serial.println("battV: " + String(analogRead(pins::battVoltage)));
+        delay(100);
     }
+
+    motorValues = calculateMotorValues(ps2x.Analog(PSS_RX), ps2x.Analog(PSS_RY), 0, 1270);
+
+
 
     pixels.show();
 }
