@@ -29,9 +29,16 @@ void loop() {
         delay(100);
     }
 
-    motorValues = calculateMotorValues(ps2x.Analog(PSS_RX), ps2x.Analog(PSS_RY), 0, 1270);
+    motorValues = calculateMotorValues(ps2x.Analog(PSS_RX), ps2x.Analog(PSS_RY), 0, 1270, -90, 90);
 
+    stepperM0.setSpeed(motorValues.val1);
+    stepperM1.setSpeed(motorValues.val2);
 
+    stepperM2.setSpeed(map(ps2x.Analog(PSS_LX), 0, 1270, -90, 90));
+
+    stepperM0.runSpeed();
+    stepperM1.runSpeed();
+    stepperM2.runSpeed();
 
     pixels.show();
 }

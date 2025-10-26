@@ -1,9 +1,9 @@
 #include "motor.h"
 
-motorValues_t calculateMotorValues(int x, int y, int min, int max) {
+motorValues_t calculateMotorValues(int x, int y, int min, int max, int motorMin, int motorMax) {
 
-    y = map(y, min, max, -90, 90);
-    x = map(x, min, max, -90, 90);
+    y = map(y, min, max, motorMin, motorMax);
+    x = map(x, min, max, motorMin, motorMax);
 
     y = x / 2 - y / 2;
     x = x / 2 + y / 2;

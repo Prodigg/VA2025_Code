@@ -14,7 +14,7 @@ struct motorValues_t {
     int val2;
 };
 
-motorValues_t calculateMotorValues(int x, int y, int min, int max);
+motorValues_t calculateMotorValues(int x, int y, int min, int max, int motorMin, int motorMax);
 
 void motorInit();
 
