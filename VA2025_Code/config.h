@@ -37,10 +37,16 @@ namespace config {
 	constexpr uint16_t M1StatusLED = 2;
 	constexpr uint16_t M2StatusLED = 3;
 
-
 	constexpr unsigned long LEDBlinkDelay = 500;
 
 	constexpr long psxAnalogMin = 0;
 	constexpr long psxAnalogMax = 1720;
+
+	constexpr long moveMotorMappedMin = -90;
+	constexpr long headMotorMappedMin = -90;
+
+	constexpr long moveMotorMappedMax = 90;
+	constexpr long headMotorMappedMax = 90;
+
 }
 #endif

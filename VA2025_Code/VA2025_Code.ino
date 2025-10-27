@@ -51,12 +51,12 @@ void loop() {
     else 
         pixels.setPixelColor(config::generalStatusLED, pixels.Color(0, 0, 0));
     
-    motorValues = calculateMotorValues(ps2x.Analog(PSS_RX), ps2x.Analog(PSS_RY), config::psxAnalogMin, config::psxAnalogMax, -90, 90);
+    motorValues = calculateMotorValues(ps2x.Analog(PSS_RY), config::psxAnalogMin, config::psxAnalogMax, config::moveMotorMappedMin, config::moveMotorMappedMax);
 
     stepperM0.setSpeed(motorValues.val1);
     stepperM1.setSpeed(motorValues.val2);
 
-    stepperM2.setSpeed(map(ps2x.Analog(PSS_LX), config::psxAnalogMin, config::psxAnalogMax, -90, 90));
+    stepperM2.setSpeed(map(ps2x.Analog(PSS_LX), config::psxAnalogMin, config::psxAnalogMax, config::headMotorMappedMin, config::headMotorMappedMax));
 
     stepperM0.runSpeed();
     stepperM1.runSpeed();
