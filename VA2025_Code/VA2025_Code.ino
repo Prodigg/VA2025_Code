@@ -15,6 +15,10 @@ void setup() {
     pinMode(LED_BUILTIN, OUTPUT);
     pixels.begin();
 
+    while (!Serial);
+
+    motorInit();
+
     for (int i = 0; i < config::neopixelCount; i++) {
         pixels.setPixelColor(i, pixels.Color(0, 0, 0));
     }
@@ -35,7 +39,7 @@ void loop() {
         digitalWrite(LED_BUILTIN, LEDToggle);
     }
 
-    if (digitalRead(pins::buttonPin) == HIGH) {
+    if (digitalRead(pins::buttonPin) == LOW) {
         Serial.println("battV: " + String(analogRead(pins::battVoltage)));
         delay(100);
     }
@@ -46,13 +50,19 @@ void loop() {
     if (!controllerInit) { // init not complete
         pixels.setPixelColor(config::generalStatusLED, pixels.Color(255, 0, 0));
         pixels.show();
+        Serial.println("ERROR: Not able to initialize controller");
+        delay(500);
         return; // continue looping from start
     }
     else 
         pixels.setPixelColor(config::generalStatusLED, pixels.Color(0, 0, 0));
     
-    motorValues = calculateMotorValues(ps2x.Analog(PSS_RY), config::psxAnalogMin, config::psxAnalogMax, config::moveMotorMappedMin, config::moveMotorMappedMax);
+    ps2x.read_gamepad(false, false);
 
+    motorValues = calculateMotorValues(ps2x.Analog(PSS_RX), ps2x.Analog(PSS_RY), config::psxAnalogMin, config::psxAnalogMax, config::moveMotorMappedMin, config::moveMotorMappedMax);
+
+    Serial.println(map(ps2x.Analog(PSS_LX), config::psxAnalogMin, config::psxAnalogMax, config::headMotorMappedMin, config::headMotorMappedMax));
+    
     stepperM0.setSpeed(motorValues.val1);
     stepperM1.setSpeed(motorValues.val2);
 
@@ -62,5 +72,9 @@ void loop() {
     stepperM1.runSpeed();
     stepperM2.runSpeed();
 
+    //motorLoop();
+
+   // Serial.println("loop");
     pixels.show();
+    delay(100);
 }

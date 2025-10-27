@@ -40,8 +40,8 @@ void motorInit() {
     /************************ init stepper ***************************/
 
     stepperM0.setMaxSpeed(config::M0MaxSpeed);
-    stepperM1.setMaxSpeed(config::M0MaxSpeed);
-    stepperM2.setMaxSpeed(config::M0MaxSpeed);
+    stepperM1.setMaxSpeed(config::M1MaxSpeed);
+    stepperM2.setMaxSpeed(config::M2MaxSpeed);
 
     stepperM0.setAcceleration(config::M0Acceleration);
     stepperM1.setAcceleration(config::M1Acceleration);

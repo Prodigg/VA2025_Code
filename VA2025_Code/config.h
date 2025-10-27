@@ -7,13 +7,13 @@ namespace config {
 	constexpr uint16_t movmentStepperMicroStepps = 1;
 	constexpr uint16_t movmentStepperRMSCurrent = 600; // mA
 
-	constexpr uint32_t M0steps_per_mm = 80;
-	constexpr uint32_t M1steps_per_mm = 80;
-	constexpr uint32_t M2steps_per_mm = 80;
+	constexpr uint32_t M0steps_per_mm = 180;
+	constexpr uint32_t M1steps_per_mm = 180;
+	constexpr uint32_t M2steps_per_mm = 180;
 
-	constexpr uint32_t M0MaxSpeed = 50 * M0steps_per_mm; // 50mm/s @ 80 steps/mm
-	constexpr uint32_t M1MaxSpeed = 50 * M1steps_per_mm; // 50mm/s @ 80 steps/mm
-	constexpr uint32_t M2MaxSpeed = 50 * M2steps_per_mm; // 50mm/s @ 80 steps/mm
+	constexpr uint32_t M0MaxSpeed = 180 * M0steps_per_mm; // 50mm/s @ 80 steps/mm
+	constexpr uint32_t M1MaxSpeed = 180 * M1steps_per_mm; // 50mm/s @ 80 steps/mm
+	constexpr uint32_t M2MaxSpeed = 180 * M2steps_per_mm; // 50mm/s @ 80 steps/mm
 
 	constexpr uint32_t M0Acceleration = 1000 * config::M0steps_per_mm; // 2000mm/s^2
 	constexpr uint32_t M1Acceleration = 1000 * config::M1steps_per_mm; // 2000mm/s^2
@@ -40,13 +40,13 @@ namespace config {
 	constexpr unsigned long LEDBlinkDelay = 500;
 
 	constexpr long psxAnalogMin = 0;
-	constexpr long psxAnalogMax = 1720;
+	constexpr long psxAnalogMax = 255;
 
-	constexpr long moveMotorMappedMin = -90;
-	constexpr long headMotorMappedMin = -90;
+	constexpr long moveMotorMappedMin = 0;
+	constexpr long headMotorMappedMin = 0;
 
-	constexpr long moveMotorMappedMax = 90;
-	constexpr long headMotorMappedMax = 90;
+	constexpr long moveMotorMappedMax = 180 * M0steps_per_mm; // 50mm/s @ 80 steps/mm
+	constexpr long headMotorMappedMax = 180 * M0steps_per_mm; // 50mm/s @ 80 steps/mm
 
 }
 #endif
