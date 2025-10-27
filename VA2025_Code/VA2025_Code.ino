@@ -1,6 +1,7 @@
 
 #include "motor.h"
 #include "global.h"
+#include "ps2xController.h"
 
 #include <Adafruit_NeoPixel.h>
 #include <PS2X_lib.h>
@@ -23,6 +24,7 @@ void setup() {
 unsigned long currentLEDMilis = 0;
 unsigned long lastLEDMilis = 0;
 bool LEDToggle = false;
+bool controllerInit = false;
 
 void loop() {
     
@@ -37,7 +39,18 @@ void loop() {
         Serial.println("battV: " + String(analogRead(pins::battVoltage)));
         delay(100);
     }
-
+    if (!controllerInit) {
+        controllerInit = initController();
+    }
+    
+    if (!controllerInit) { // init not complete
+        pixels.setPixelColor(config::generalStatusLED, pixels.Color(255, 0, 0));
+        pixels.show();
+        return; // continue looping from start
+    }
+    else 
+        pixels.setPixelColor(config::generalStatusLED, pixels.Color(0, 0, 0));
+    
     motorValues = calculateMotorValues(ps2x.Analog(PSS_RX), ps2x.Analog(PSS_RY), config::psxAnalogMin, config::psxAnalogMax, -90, 90);
 
     stepperM0.setSpeed(motorValues.val1);

@@ -1,42 +1,4 @@
-
-void initController() {
-    byte error = -1;
-
-    while (error != 0) {
-        error = ps2x.config_gamepad(pins::PS2_CLK, pins::PS2_CMD, pins::PS2_SEL, pins::PS2_DAT, false, false);
-
-        if (error == 0) { }
-        else if (error == 1) {
-            Serial.println("No controller found");
-            delay(3000);
-        }
-        else if (error == 2)
-            Serial.println("Controller found but not accepting commands.");
-
-        else if (error == 3)
-            Serial.println("Controller refusing to enter Pressures mode");
-    
-
-        switch (ps2x.readType()) {
-        case 0:
-            Serial.print("Unknown Controller type found");
-            error = -1;
-            break;
-        case 1: // valid controller, continue
-            break;
-        case 2:
-            Serial.print("Unsuported Controller found");
-            error = -1;
-            break;
-        case 3:
-            Serial.print("Unsuported Controller found");
-            error = -1;
-            break;
-        }
-    }
-}
-
-void loopController() {
+void bspGamepad() {
     
    ps2x.read_gamepad(false, false);
 
