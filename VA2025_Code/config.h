@@ -33,6 +33,9 @@ namespace config {
 
 	constexpr uint16_t neopixelCount = 4;
 
+	constexpr unsigned long LEDBlinkDelay = 500;
 
+	constexpr long psxAnalogMin = 0;
+	constexpr long psxAnalogMax = 1720;
 }
 #endif
