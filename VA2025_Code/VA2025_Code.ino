@@ -71,12 +71,18 @@ void loop() {
 
     motorValues = calculateMotorValues(ps2x.Analog(PSS_RX), ps2x.Analog(PSS_RY), config::psxAnalogMin, config::psxAnalogMax, config::moveMotorMappedMin, config::moveMotorMappedMax);
 
-    Serial.println(map(ps2x.Analog(PSS_LX), config::psxAnalogMin, config::psxAnalogMax, config::headMotorMappedMin, config::headMotorMappedMax));
+    //Serial.println(map(ps2x.Analog(PSS_LX), config::psxAnalogMin, config::psxAnalogMax, config::headMotorMappedMin, config::headMotorMappedMax));
     
-    stepperM0.setSpeed(motorValues.val1);
-    stepperM1.setSpeed(motorValues.val2);
+    stepperM0.setSpeed(deadzone(motorValues.val1, config::motorDeadzoneZero, config::motorDeadzoneSize));
+    stepperM1.setSpeed(deadzone(motorValues.val2, config::motorDeadzoneZero, config::motorDeadzoneSize));
 
-    stepperM2.setSpeed(map(ps2x.Analog(PSS_LX), config::psxAnalogMin, config::psxAnalogMax, config::headMotorMappedMin, config::headMotorMappedMax));
+    stepperM2.setSpeed(
+        deadzone(
+            map(ps2x.Analog(PSS_LX), config::psxAnalogMin, config::psxAnalogMax, config::headMotorMappedMin, config::headMotorMappedMax), 
+            config::motorDeadzoneZero, 
+            config::motorDeadzoneSize
+        )
+    );
 
     stepperM0.runSpeed();
     stepperM1.runSpeed();

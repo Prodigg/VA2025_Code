@@ -20,4 +20,6 @@ void motorInit();
 
 void motorLoop();
 
+int deadzone(int inputValue, int pointZero, int deadzoneSize);
+
 #endif

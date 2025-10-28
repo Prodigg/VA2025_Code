@@ -90,4 +90,10 @@ void motorLoop() {
     stepperM2.run();
 }
 
+int deadzone(int inputValue, int pointZero, int deadzoneSize) {
+    if (abs(inputValue - pointZero) <= deadzoneSize)
+        return pointZero;
+    return inputValue;
+}
+
 

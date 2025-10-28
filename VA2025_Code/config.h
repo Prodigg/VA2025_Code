@@ -48,5 +48,8 @@ namespace config {
 	constexpr long moveMotorMappedMax = 180 * M0steps_per_mm; // 50mm/s @ 80 steps/mm
 	constexpr long headMotorMappedMax = 180 * M0steps_per_mm; // 50mm/s @ 80 steps/mm
 
+	constexpr int motorDeadzoneZero = 0;
+	constexpr int motorDeadzoneSize = 2400;
+
 }
 #endif
