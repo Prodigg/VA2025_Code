@@ -15,14 +15,24 @@ void setup() {
     pinMode(LED_BUILTIN, OUTPUT);
     pixels.begin();
 
-    while (!Serial);
-
-    motorInit();
-
     for (int i = 0; i < config::neopixelCount; i++) {
         pixels.setPixelColor(i, pixels.Color(0, 0, 0));
     }
     pixels.setBrightness(100);
+
+    unsigned long lastStartupMilis = millis();
+    bool statusLEDToggle = false;
+    while (!Serial) {
+        if (lastStartupMilis - millis() >= 5000)
+            break; // break out after 5s
+
+        delay(500);
+        statusLEDToggle = !statusLEDToggle;
+        pixels.setPixelColor(config::generalStatusLED, statusLEDToggle == false ? pixels.Color(0, 0, 0) : pixels.Color(255, 255, 255));
+    }
+    pixels.setPixelColor(config::generalStatusLED, pixels.Color(0, 0, 0));
+ 
+    motorInit();
 }
 
 unsigned long currentLEDMilis = 0;
@@ -76,5 +86,5 @@ void loop() {
 
    // Serial.println("loop");
     pixels.show();
-    delay(100);
+    //delay(100);
 }

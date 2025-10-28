@@ -42,8 +42,8 @@ namespace config {
 	constexpr long psxAnalogMin = 0;
 	constexpr long psxAnalogMax = 255;
 
-	constexpr long moveMotorMappedMin = 0;
-	constexpr long headMotorMappedMin = 0;
+	constexpr long moveMotorMappedMin = -180 * M0steps_per_mm; // 50mm/s @ 80 steps/mm
+	constexpr long headMotorMappedMin = -180 * M0steps_per_mm; // 50mm/s @ 80 steps/mm
 
 	constexpr long moveMotorMappedMax = 180 * M0steps_per_mm; // 50mm/s @ 80 steps/mm
 	constexpr long headMotorMappedMax = 180 * M0steps_per_mm; // 50mm/s @ 80 steps/mm
