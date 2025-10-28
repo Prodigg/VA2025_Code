@@ -85,6 +85,10 @@ void loop() {
         )
     );
 
+    motorPowerSave(stepperM0, pixels, config::M0StatusLED);
+    motorPowerSave(stepperM1, pixels, config::M1StatusLED);
+    motorPowerSave(stepperM2, pixels, config::M2StatusLED);
+
     stepperM0.runSpeed();
     stepperM1.runSpeed();
     stepperM2.runSpeed();

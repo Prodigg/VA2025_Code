@@ -22,4 +22,6 @@ void motorLoop();
 
 int deadzone(int inputValue, int pointZero, int deadzoneSize);
 
+bool motorPowerSave(AccelStepper& motor, Adafruit_NeoPixel& pixels, uint16_t statusLED);
+
 #endif

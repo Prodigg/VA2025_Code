@@ -97,3 +97,15 @@ int deadzone(int inputValue, int pointZero, int deadzoneSize) {
 }
 
 
+bool motorPowerSave(AccelStepper& motor, Adafruit_NeoPixel& pixels, uint16_t statusLED) {
+    if (motor.speed() == 0) {
+        motor.disableOutputs();
+        pixels.setPixelColor(statusLED, pixels.Color(0, 0, 255));
+        return false;
+    }
+    else {
+        motor.enableOutputs();
+        pixels.setPixelColor(statusLED, pixels.Color(0, 0, 0));
+        return true;
+    }
+}
