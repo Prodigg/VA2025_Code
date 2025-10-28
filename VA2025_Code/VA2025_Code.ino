@@ -29,9 +29,10 @@ void setup() {
         delay(500);
         statusLEDToggle = !statusLEDToggle;
         pixels.setPixelColor(config::generalStatusLED, statusLEDToggle == false ? pixels.Color(0, 0, 0) : pixels.Color(255, 255, 255));
+        pixels.show();
     }
     pixels.setPixelColor(config::generalStatusLED, pixels.Color(0, 0, 0));
- 
+    pixels.show();
     motorInit();
 }
 
