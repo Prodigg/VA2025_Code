@@ -23,7 +23,7 @@ void setup() {
     unsigned long lastStartupMilis = millis();
     bool statusLEDToggle = false;
     while (!Serial) {
-        if (lastStartupMilis - millis() >= 5000)
+        if (millis() - lastStartupMilis >= 5000)
             break; // break out after 5s
 
         delay(500);
