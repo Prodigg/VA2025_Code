@@ -1,5 +1,6 @@
 #pragma once
 #include <Adafruit_NeoPixel.h>
+#include "global.h"
 
 namespace LEDPatterns {
 	class WalkingLight_t {
