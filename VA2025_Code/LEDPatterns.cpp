@@ -1,12 +1,14 @@
 #include "LEDPatterns.h"
 
-inline LEDPatterns::WalkingLight_t& LEDPatterns::WalkingLight_t::setPixelPattern(uint8_t pixelPatternArray, size_t size) {
+inline LEDPatterns::WalkingLight_t& LEDPatterns::WalkingLight_t::setPixelPattern(uint8_t* pixelPatternArray, size_t size) {
   _pixelPatternArrayPtr = pixelPatternArray;
   _pixelPatternArraySize = size;
   return *this;
 }
 
 void LEDPatterns::WalkingLight_t::draw() {
+  if (_pixelPatternArrayPtr == nullptr)
+    return;
 
   _currentMilis = millis();
   if (_currentMilis >= _previausDrawTime + _drawingWaitTime) {
@@ -41,4 +43,39 @@ uint8_t LEDPatterns::WalkingLight_t::calcNextPixelPatternIndex(uint8_t currentPi
     return --currentPixelPatternIndex;
   else
     return ++currentPixelPatternIndex;
+}
+
+LEDPatterns::pulsating_t& LEDPatterns::pulsating_t::setPixelPattern(uint8_t* pixelPatternArray, size_t size) {
+  _pixelPatternArrayPtr = pixelPatternArray;
+  _pixelPatternArraySize = size;
+}
+
+void LEDPatterns::pulsating_t::draw() {
+  if (_pixelPatternArrayPtr == nullptr)
+    return;
+
+  _colorBrightness = static_cast<uint8_t>(map<double>(sin(millis()), -1, 1, 0, 255));
+  _color = Adafruit_NeoPixel::ColorHSV(_colorHue, _colorSaturation, _colorBrightness);
+
+  for (size_t i = 0; i < _pixelPatternArraySize; i++) {
+    _pixels.setPixelColor(_pixelPatternArrayPtr[i], _color);
+  }
+}
+
+LEDPatterns::rainbow_t& LEDPatterns::rainbow_t::setPixelPattern(uint8_t* pixelPatternArray, size_t size) {
+  _pixelPatternArrayPtr = pixelPatternArray;
+  _pixelPatternArraySize = pixelPatternArray;
+  return *this;
+}
+
+void LEDPatterns::rainbow_t::draw() {
+  if (_pixelPatternArrayPtr == nullptr)
+    return;
+
+  _colorHue += _stepSize;
+  _color = Adafruit_NeoPixel::ColorHSV(_colorHue);
+
+  for (size_t i = 0; i < _pixelPatternArraySize; i++) {
+    _pixels.setPixelColor(_pixelPatternArrayPtr[i], _color);
+  }
 }

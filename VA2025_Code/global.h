@@ -24,4 +24,9 @@ extern AccelStepper stepperM0;
 extern AccelStepper stepperM1;
 extern AccelStepper stepperM2;
 
+template<typename T>
+T map(T val, T fromLow, T fromHigh, T toLow, T toHigh) {
+	return toLow + ((toHigh - toLow) / (fromHigh - fromLow)) * (val - fromLow);
+}
+
 #endif

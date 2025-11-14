@@ -19,7 +19,7 @@ void setup() {
         pixels.setPixelColor(i, pixels.Color(0, 0, 0));
     }
     pixels.setBrightness(100);
-
+    
     unsigned long lastStartupMilis = millis();
     bool statusLEDToggle = false;
     while (!Serial) {
