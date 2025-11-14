@@ -15,7 +15,7 @@ void LEDPatterns::WalkingLight_t::draw() {
     _previausDrawTime = _currentMilis;
     
       if (_eraseBehind)
-        pixels.setPixelColor(_pixelPatternArrayPtr[_pixelPatternIndex], _pixelOffColor);
+        _pixels.setPixelColor(_pixelPatternArrayPtr[_pixelPatternIndex], _pixelOffColor);
       _pixelPatternIndex = calcNextPixelPatternIndex(_pixelPatternIndex);
       _pixels.setPixelColor(_pixelPatternArrayPtr[_pixelPatternIndex], _pixelOnColor);
   }
@@ -48,6 +48,7 @@ uint8_t LEDPatterns::WalkingLight_t::calcNextPixelPatternIndex(uint8_t currentPi
 LEDPatterns::pulsating_t& LEDPatterns::pulsating_t::setPixelPattern(uint8_t* pixelPatternArray, size_t size) {
   _pixelPatternArrayPtr = pixelPatternArray;
   _pixelPatternArraySize = size;
+  return *this;
 }
 
 void LEDPatterns::pulsating_t::draw() {
@@ -64,7 +65,7 @@ void LEDPatterns::pulsating_t::draw() {
 
 LEDPatterns::rainbow_t& LEDPatterns::rainbow_t::setPixelPattern(uint8_t* pixelPatternArray, size_t size) {
   _pixelPatternArrayPtr = pixelPatternArray;
-  _pixelPatternArraySize = pixelPatternArray;
+  _pixelPatternArraySize = size;
   return *this;
 }
 
