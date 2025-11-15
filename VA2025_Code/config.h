@@ -31,7 +31,7 @@ namespace config {
 	constexpr bool M1EnInverted = true;
 	constexpr bool M2EnInverted = true;
 
-	constexpr uint16_t neopixelCount = 50;
+	constexpr uint16_t neopixelCount = 40;
 	constexpr uint16_t generalStatusLED = 0; 
 	constexpr uint16_t M0StatusLED = 1;
 	constexpr uint16_t M1StatusLED = 2;

@@ -2,6 +2,8 @@
 #include "motor.h"
 #include "global.h"
 #include "ps2xController.h"
+#include "LEDPatterns.h"
+#include "LEDPatternsPredefined.h"
 
 #include <Adafruit_NeoPixel.h>
 #include <PS2X_lib.h>
@@ -9,14 +11,26 @@
 #include <AccelStepper.h>
 
 motorValues_t motorValues{};
+LEDPatterns::rainbow_t* rainbowLEDs;
+LEDPatterns::WalkingLight_t* walkingLight;
 
 void setup() {
     pinMode(pins::buttonPin, INPUT);
     pinMode(LED_BUILTIN, OUTPUT);
     pixels.begin();
     
+    rainbowLEDs = new LEDPatterns::rainbow_t(pixels);
+    rainbowLEDs->setPixelPattern(predifined::allLEDS, predifined::allLEDS_size - 10);
+    rainbowLEDs->setStepSize(5000);
+
+    walkingLight = new LEDPatterns::WalkingLight_t(pixels);
+    walkingLight->pixelOffColor(Adafruit_NeoPixel::Color(0, 0, 0));
+    walkingLight->pixelOnColor(Adafruit_NeoPixel::Color(0, 255, 0));
+    walkingLight->setPixelPattern(predifined::topLEDs, predifined::topLEDs_size);
+    walkingLight->bounceLight(true);
+
     for (int i = 0; i < config::neopixelCount; i++) {
-        pixels.setPixelColor(i, pixels.Color(0, 0, 0));
+        pixels.setPixelColor(i, pixels.Color(0, 0, 255));
     }
     pixels.setBrightness(100);
     
@@ -95,6 +109,8 @@ void loop() {
         motorPowerSave(stepperM1, pixels, config::M1StatusLED);
         motorPowerSave(stepperM2, pixels, config::M2StatusLED);
 
+        rainbowLEDs->draw();
+        walkingLight->draw();
         pixels.show();
     }
 

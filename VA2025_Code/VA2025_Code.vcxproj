@@ -60,6 +60,7 @@
     <ClInclude Include="config.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="LEDPatterns.h" />
+    <ClInclude Include="LEDPatternsPredefined.h" />
     <ClInclude Include="motor.h" />
     <ClInclude Include="pindef.h" />
     <ClInclude Include="ps2xController.h" />

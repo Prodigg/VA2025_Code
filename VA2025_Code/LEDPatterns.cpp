@@ -1,6 +1,6 @@
 #include "LEDPatterns.h"
 
-inline LEDPatterns::WalkingLight_t& LEDPatterns::WalkingLight_t::setPixelPattern(uint8_t* pixelPatternArray, size_t size) {
+LEDPatterns::WalkingLight_t& LEDPatterns::WalkingLight_t::setPixelPattern(const uint8_t* pixelPatternArray, size_t size) {
   _pixelPatternArrayPtr = pixelPatternArray;
   _pixelPatternArraySize = size;
   return *this;
@@ -23,10 +23,10 @@ void LEDPatterns::WalkingLight_t::draw() {
 }
 
 uint8_t LEDPatterns::WalkingLight_t::calcNextPixelPatternIndex(uint8_t currentPixelPatternIndex) {
-  if (currentPixelPatternIndex >= _pixelPatternArraySize) {
+  if (currentPixelPatternIndex >= _pixelPatternArraySize - 1) {
     if (_bounceLight) {
       _pixelPatternReverse = true;
-      return _pixelPatternArraySize - 1;
+      return _pixelPatternArraySize - 2;
     }
     else {
       return 0; // return start of array
@@ -45,7 +45,7 @@ uint8_t LEDPatterns::WalkingLight_t::calcNextPixelPatternIndex(uint8_t currentPi
     return ++currentPixelPatternIndex;
 }
 
-LEDPatterns::pulsating_t& LEDPatterns::pulsating_t::setPixelPattern(uint8_t* pixelPatternArray, size_t size) {
+LEDPatterns::pulsating_t& LEDPatterns::pulsating_t::setPixelPattern(const uint8_t* pixelPatternArray, size_t size) {
   _pixelPatternArrayPtr = pixelPatternArray;
   _pixelPatternArraySize = size;
   return *this;
@@ -63,7 +63,7 @@ void LEDPatterns::pulsating_t::draw() {
   }
 }
 
-LEDPatterns::rainbow_t& LEDPatterns::rainbow_t::setPixelPattern(uint8_t* pixelPatternArray, size_t size) {
+LEDPatterns::rainbow_t& LEDPatterns::rainbow_t::setPixelPattern(const uint8_t* pixelPatternArray, size_t size) {
   _pixelPatternArrayPtr = pixelPatternArray;
   _pixelPatternArraySize = size;
   return *this;
