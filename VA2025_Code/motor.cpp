@@ -2,11 +2,13 @@
 
 motorValues_t calculateMotorValues(int x, int y, int min, int max, int motorMin, int motorMax) {
 
-    y = map(y, min, max, motorMin, motorMax);
-    x = map(x, min, max, motorMin, motorMax);
+    y = map(y, max, min, motorMin, motorMax);
+    x = map(x, min, max, motorMax, motorMin);
 
-    y = x / 2 - y / 2;
-    x = x / 2 + y / 2;
+    y = (y - x) / 2;
+    x = (y + x) / 2;
+    
+   
     return { x, y };
 }
 
@@ -100,12 +102,12 @@ int deadzone(int inputValue, int pointZero, int deadzoneSize) {
 bool motorPowerSave(AccelStepper& motor, Adafruit_NeoPixel& pixels, uint16_t statusLED) {
     if (motor.speed() == 0) {
         motor.disableOutputs();
-        pixels.setPixelColor(statusLED, pixels.Color(0, 0, 255));
+        pixels.setPixelColor(statusLED, pixels.Color(0, 0, 0));
         return false;
     }
     else {
         motor.enableOutputs();
-        pixels.setPixelColor(statusLED, pixels.Color(0, 0, 0));
+        pixels.setPixelColor(statusLED, pixels.Color(0, 0, 255));
         return true;
     }
 }
