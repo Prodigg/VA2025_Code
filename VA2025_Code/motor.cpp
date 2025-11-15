@@ -103,11 +103,15 @@ bool motorPowerSave(AccelStepper& motor, Adafruit_NeoPixel& pixels, uint16_t sta
     if (motor.speed() == 0) {
         motor.disableOutputs();
         pixels.setPixelColor(statusLED, pixels.Color(0, 0, 0));
-        return false;
+        return true;
     }
     else {
         motor.enableOutputs();
         pixels.setPixelColor(statusLED, pixels.Color(0, 0, 255));
-        return true;
+        return false;
     }
+}
+
+bool motorInPowerSave(AccelStepper& motor) {
+    return motor.speed() == 0;
 }

@@ -13,6 +13,7 @@
 motorValues_t motorValues{};
 LEDPatterns::rainbow_t* rainbowLEDs;
 LEDPatterns::WalkingLight_t* walkingLight;
+LEDPatterns::pulsating_t* pulsatingLEDs;
 
 void setup() {
     pinMode(pins::buttonPin, INPUT);
@@ -29,8 +30,12 @@ void setup() {
     walkingLight->setPixelPattern(predifined::topLEDs, predifined::topLEDs_size);
     walkingLight->bounceLight(true);
 
+    pulsatingLEDs = new LEDPatterns::pulsating_t(pixels);
+    pulsatingLEDs->setPixelPattern(predifined::allLEDS, predifined::allLEDS_size - 10)
+        .setColor(random((uint16_t)0, (uint16_t)-1), 255);
+
     for (int i = 0; i < config::neopixelCount; i++) {
-        pixels.setPixelColor(i, pixels.Color(0, 0, 255));
+        pixels.setPixelColor(i, pixels.Color(0, 0, 0));
     }
     pixels.setBrightness(100);
     
@@ -48,6 +53,26 @@ void setup() {
     pixels.setPixelColor(config::generalStatusLED, pixels.Color(0, 0, 0));
     pixels.show();
     motorInit();
+
+    // startup animation
+    LEDPatterns::WalkingLight_t walkingLightStart(pixels);
+    walkingLightStart.setPixelPattern(predifined::startupPattern, predifined::startupPattern_size)
+        .pixelOffColor(Adafruit_NeoPixel::Color(0, 255, 0))
+        .pixelOnColor(Adafruit_NeoPixel::Color(0, 0, 255));
+
+    stepperM0.disableOutputs();
+    stepperM1.disableOutputs();
+    stepperM2.disableOutputs();
+
+    while (!walkingLightStart.isAnimationAtEnd()) {
+        walkingLightStart.draw();
+        pixels.show();
+        delay(50);
+    }
+
+    stepperM0.enableOutputs();
+    stepperM1.enableOutputs();
+    stepperM2.enableOutputs();
 }
 
 unsigned long currentLEDMilis = 0;
@@ -109,7 +134,15 @@ void loop() {
         motorPowerSave(stepperM1, pixels, config::M1StatusLED);
         motorPowerSave(stepperM2, pixels, config::M2StatusLED);
 
-        rainbowLEDs->draw();
+        if (motorInPowerSave(stepperM0) && motorInPowerSave(stepperM1) && motorInPowerSave(stepperM2)) {
+            rainbowLEDs->draw();
+        }
+        else {
+            if (pulsatingLEDs->currentColorBrightness() < 5)
+                pulsatingLEDs->setColor(random((uint16_t)0, (uint16_t)-1), 255);
+            pulsatingLEDs->draw();
+        }
+            
         walkingLight->draw();
         pixels.show();
     }
@@ -121,5 +154,5 @@ void loop() {
     //motorLoop();
 
    // Serial.println("loop");
-    //delay(100);
+   //delay(100);
 }

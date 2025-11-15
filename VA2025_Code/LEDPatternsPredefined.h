@@ -26,10 +26,22 @@ namespace predifined {
 		28, 29, 30, 31, 32, 33, 34, 35, 36, 37
 	};
 
+	inline constexpr uint8_t startupPattern[] = {
+		4, 10, 16, 22, 
+		5, 11, 17, 23, 
+		6, 12, 18, 24, 
+		7, 13, 19, 25, 
+		8, 14, 20, 26, 
+		9, 15, 21, 27, 
+
+		28, 29, 30, 31, 32, 33, 34, 35, 36, 37
+	};
+
 	inline constexpr size_t allLEDS_size = sizeof(allLEDS) / sizeof(allLEDS[0]);
 	inline constexpr size_t row1LEDs_size = sizeof(row1LEDs) / sizeof(row1LEDs[0]);
 	inline constexpr size_t row2LEDs_size = sizeof(row2LEDs) / sizeof(row2LEDs[0]);
 	inline constexpr size_t row3LEDs_size = sizeof(row3LEDs) / sizeof(row3LEDs[0]);
 	inline constexpr size_t row4LEDs_size = sizeof(row4LEDs) / sizeof(row4LEDs[0]);
 	inline constexpr size_t topLEDs_size = sizeof(topLEDs) / sizeof(topLEDs[0]);
+	inline constexpr size_t startupPattern_size = sizeof(startupPattern) / sizeof(startupPattern[0]);
 }

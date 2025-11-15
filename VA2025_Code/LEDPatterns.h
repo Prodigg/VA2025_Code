@@ -20,6 +20,8 @@ namespace LEDPatterns {
 
 		inline WalkingLight_t& bounceLight(bool bounceLight) { _bounceLight = bounceLight; return *this; };
 
+		bool isAnimationAtEnd() { return _pixelPatternIndex >= _pixelPatternArraySize - 1; }
+
 		/*!
 		 * @brief the main draw function
 		 */
@@ -56,6 +58,7 @@ namespace LEDPatterns {
 		pulsating_t& setPixelPattern(const uint8_t* pixelPatternArray, size_t size);
 		inline pulsating_t& setColor(uint16_t hue, uint8_t saturation) { _colorHue = hue; _colorSaturation = saturation; return *this; };
 		inline pulsating_t& timeFactor(double timeFactor) { _timeFactor = timeFactor; return *this; };
+		uint8_t currentColorBrightness() { return _colorBrightness; }
 
 		void draw();
 	private:

@@ -24,4 +24,6 @@ int deadzone(int inputValue, int pointZero, int deadzoneSize);
 
 bool motorPowerSave(AccelStepper& motor, Adafruit_NeoPixel& pixels, uint16_t statusLED);
 
+bool motorInPowerSave(AccelStepper& motor);
+
 #endif
